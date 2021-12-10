@@ -3,47 +3,76 @@ import React, { Component } from 'react'
 class Home extends Component {
     constructor(props) {
         super(props);
-        this.state = {  }
+        this.state = {
+            player1Turn: true
+         }
+    }
+
+    fillSquare = (id, val) => {
+        let {player1Turn} = this.state
+        
+        if (val === 's' || val === 'o'){
+            document.getElementById(id).value = val.toUpperCase()
+        }
+        else if (val !== 'S' && val !== 'O'){
+            document.getElementById(id).value = ''
+            return
+        } 
+
+        let isSOS = this.checkForSOS()
+        let isBoardComplete = this.isBoardComplete()
+        this.setState({player1Turn: !player1Turn})
+    }
+
+    checkForSOS = () => {
+
+    }
+
+    isBoardComplete = () => {
+        
     }
 
     render() { 
+        let turn = this.state.player1Turn ? 'Player 1' : 'Player 2'
+        
         return ( 
             <div className='home'>
+                <h1 className='turn'>Turn: {turn}</h1>
                 <div className='board'>
                     <div className='column'>
-                        <div className='square' id='square1' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square2' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square3' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square4' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square5' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
+                        <div className='square'><input type="text" id='square1' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square2' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square3' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square4' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square5' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
                     </div>
                     <div className='column'>
-                        <div className='square' id='square6' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square7' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square8' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square9' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square10' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
+                        <div className='square'><input type="text" id='square6' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square7' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square8' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square9' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square10' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
                     </div>
                     <div className='column'>
-                        <div className='square' id='square11' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square12' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square13' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square14' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square15' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
+                        <div className='square'><input type="text" id='square11' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square12' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square13' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square14' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square15' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
                     </div>
                     <div className='column'>
-                        <div className='square' id='square16' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square17' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square18' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square19' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square20' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
+                        <div className='square'><input type="text" id='square16' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square17' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square18' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square19' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square20' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
                     </div>
                     <div className='column'>
-                        <div className='square' id='square21' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square22' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square23' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square24' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
-                        <div className='square' id='square25' onClick={(e) => {this.fillSquare(e.target.id)}}></div>
+                        <div className='square'><input type="text" id='square21' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square22' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square23' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square24' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
+                        <div className='square'><input type="text" id='square25' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
                     </div>
                 </div>
             </div>
