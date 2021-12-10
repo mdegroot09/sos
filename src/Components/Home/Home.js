@@ -4,26 +4,36 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            player1Turn: true
+            player1Turn: true,
+            player1Score: 0,
+            player2Score: 0
          }
     }
 
     fillSquare = (id, val) => {
-        let {player1Turn} = this.state
+        let {player1Turn, player1Score, player2Score} = this.state
+        let e = document.getElementById(id)
         
         if (val === 's' || val === 'o'){
-            document.getElementById(id).value = val.toUpperCase()
+            e.value = val.toUpperCase()
         }
         else if (val !== 'S' && val !== 'O'){
-            document.getElementById(id).value = ''
+            e.value = ''
             return
         } 
+        e.disabled = true
 
         let isSOS = this.checkForSOS(id)
         let isBoardComplete = this.isBoardComplete()
         if (isSOS){
-            console.log('yay')
+            player1Score++
+            player2Score++
+            player1Turn ? this.setState({player1Score}) : this.setState({player2Score})
         }
+        if (isBoardComplete){
+            console.log('game over')
+        }
+
         this.setState({player1Turn: !player1Turn})
     }
 
@@ -56,15 +66,24 @@ class Home extends Component {
     }
 
     isBoardComplete = () => {
-        
+        let vals = []
+        for (let i = 1; i <= 25; i++){
+            vals.push(document.getElementById(`square${i}`).value)
+        }
+        return !vals.includes('')
     }
 
     render() { 
         let turn = this.state.player1Turn ? 'Player 1' : 'Player 2'
+        let {player1Score, player2Score} = this.state
         
         return ( 
             <div className='home'>
-                <h1 className='turn'>Turn: {turn}</h1>
+                <div className='scores'>
+                    <h1 style={{marginRight: '30px'}}>Player 1: {player1Score}</h1>
+                    <h1>Player 2: {player2Score}</h1>
+                </div>
+                <h1 className='header'>Turn: {turn}</h1>
                 <div className='board'>
                     <div className='column'>
                         <div className='square'><input type="text" id='square1' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>

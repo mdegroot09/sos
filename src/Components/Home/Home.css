@@ -7,7 +7,11 @@
     min-height: 100vh;
 }
 
-.turn {
+.scores {
+    display: flex;
+}
+
+.header {
     margin-bottom: 50px;
 }
 
@@ -18,6 +22,7 @@
     max-height: calc(100vw - 100px);
     display: flex;
     border: 1px solid black;
+    margin-bottom: 50px;
 }
 
 .column {
@@ -35,8 +40,13 @@
 }
 
 input {
+    height: 100%;
     width: 100%;
     overflow: hidden;
     text-align: center;
     font-size: 3rem;
+    color: black;
+    border-radius: 0px;
+    overflow: none;
+    padding: 0px;
 }
