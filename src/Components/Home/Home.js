@@ -19,13 +19,40 @@ class Home extends Component {
             return
         } 
 
-        let isSOS = this.checkForSOS()
+        let isSOS = this.checkForSOS(id)
         let isBoardComplete = this.isBoardComplete()
+        if (isSOS){
+            console.log('yay')
+        }
         this.setState({player1Turn: !player1Turn})
     }
 
-    checkForSOS = () => {
+    checkForSOS = (id) => {
+        let combos = []
+        let num = Number(id.split('square')[1])
 
+        combos.push([num - 10, num - 5, num, num + 5, num + 10])
+        combos.push([num - 2, num - 1, num, num + 1, num + 2])
+        combos.push([num - 12, num - 6, num, num + 6, num + 12])
+        combos.push([num - 8, num - 4, num, num + 4, num + 8])
+
+        return this.checkCombos(combos)
+    }
+
+    checkCombos = (combos) => {
+        let sos = false
+        combos.forEach((a)=> {
+            let str = ''
+            a.forEach((b)=> {
+                if (b > 0 && b < 26){
+                    str += document.getElementById(`square${b}`).value
+                }
+            })
+            if (str.includes('SOS')){
+                sos = true
+            }
+        })
+        return sos
     }
 
     isBoardComplete = () => {
