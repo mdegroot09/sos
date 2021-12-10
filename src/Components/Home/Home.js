@@ -6,7 +6,8 @@ class Home extends Component {
         this.state = {
             player1Turn: true,
             player1Score: 0,
-            player2Score: 0
+            player2Score: 0,
+            winner: false
          }
     }
 
@@ -30,11 +31,7 @@ class Home extends Component {
             player2Score++
             player1Turn ? this.setState({player1Score}) : this.setState({player2Score})
         }
-        if (isBoardComplete){
-            console.log('game over')
-        }
-
-        this.setState({player1Turn: !player1Turn})
+        isBoardComplete ? this.setState({winner: true}) : this.setState({player1Turn: !player1Turn})
     }
 
     checkForSOS = (id) => {
@@ -73,9 +70,18 @@ class Home extends Component {
         return !vals.includes('')
     }
 
+    resetBoard = () => {
+        for (let i = 1; i <= 25; i++){
+            let e = document.getElementById(`square${i}`)
+            e.value = ''
+            e.disabled = false
+            this.setState({player1Score: 0, player2Score: 0, winner: false})
+        }
+    }
+
     render() { 
         let turn = this.state.player1Turn ? 'Player 1' : 'Player 2'
-        let {player1Score, player2Score} = this.state
+        let {player1Score, player2Score, winner} = this.state
         
         return ( 
             <div className='home'>
@@ -83,7 +89,8 @@ class Home extends Component {
                     <h1 style={{marginRight: '30px'}}>Player 1: {player1Score}</h1>
                     <h1>Player 2: {player2Score}</h1>
                 </div>
-                <h1 className='header'>Turn: {turn}</h1>
+                <h1 className='turn' style={{display: winner ? 'none' : 'block'}}>Turn: {turn}</h1>
+                <h1 className='turn' style={{display: winner ? 'block' : 'none'}}>{turn} WINS!</h1>
                 <div className='board'>
                     <div className='column'>
                         <div className='square'><input type="text" id='square1' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
@@ -121,6 +128,7 @@ class Home extends Component {
                         <div className='square'><input type="text" id='square25' onChange={(e) => {this.fillSquare(e.target.id, e.target.value)}}/></div>
                     </div>
                 </div>
+                <button onClick={this.resetBoard}>new</button>
             </div>
         );
     }

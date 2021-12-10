@@ -11,7 +11,7 @@
     display: flex;
 }
 
-.header {
+.turn {
     margin-bottom: 50px;
 }
 
@@ -49,4 +49,10 @@ input {
     border-radius: 0px;
     overflow: none;
     padding: 0px;
+}
+
+button {
+    height: 40px;
+    width: 130px;
+    cursor: pointer;
 }
