@@ -49,6 +49,7 @@ input {
     border-radius: 0px;
     overflow: none;
     padding: 0px;
+    border: none;
 }
 
 button {
